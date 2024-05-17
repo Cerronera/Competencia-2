@@ -1,1 +1,4 @@
-# Competencia-2
+# Daniel Seidenthal
+# Igor Gustavo Mainardes
+# Jhonatan Bruno
+# Vinicius Cerrone
