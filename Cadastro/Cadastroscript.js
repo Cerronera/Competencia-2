@@ -157,6 +157,7 @@ function checkInputsConfirmSenha() {
         formItem.className = "form-content"
     }
 }
+
 function checkForm(){
     checkInputsName();
     checkInputsIdade();
@@ -169,10 +170,20 @@ function checkForm(){
     const isValid = [...formItems].every((item) => {
         return item.className === "form-content"
     });
+
+    // Seleciona o botão de envio do formulário
+    const submitButton = form.querySelector('button[type="submit"]');
+
     if(isValid) {
         alert("Cadastro realizado com sucesso");
-    }else {
+        // Adiciona a classe 'success' e remove 'error' se o formulário for válido
+        submitButton.classList.add('success');
+        submitButton.classList.remove('error');
+    } else {
         alert("Preencha todos os campos corretamente");
+        // Adiciona a classe 'error' e remove 'success' se o formulário for inválido
+        submitButton.classList.add('error');
+        submitButton.classList.remove('success');
     }
 }
 

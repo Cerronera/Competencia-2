@@ -106,10 +106,16 @@ function checkForm(){
     const isValid = [...formItems].every((item) => {
         return item.className === "form-content"
     });
+
+    const submitButton = form.querySelector('button[type="submit"]');
     if(isValid) {
         alert("Devolução realizada com sucesso");
+        submitButton.classList.add('success');
+        submitButton.classList.remove('error');
     }else {
         alert("Preencha todos os campos corretamente");
+        submitButton.classList.add('error');
+        submitButton.classList.remove('success');
     }
 }
 

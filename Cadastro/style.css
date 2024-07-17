@@ -109,7 +109,7 @@ body::before {
     visibility: hidden;
     bottom: -8px;
 }
-
+/* Estilos para o botão de envio */
 .form button{
     background-color: #0048ff;
     color: #fff;
@@ -120,6 +120,28 @@ body::before {
     font-size: 16px;
     cursor: pointer;
     margin-top: 14px;
+}
+
+/* Estilo para o botão de envio quando o formulário for válido */
+button[type="submit"].success {
+  background-color: #008000; /* Verde */
+  color: white;
+}
+
+/* Estilo para o botão de envio quando o formulário for inválido */
+button[type="submit"].error {
+  background-color: #ff0000; /* Vermelho */
+  color: white;
+}
+
+/* Estilo para a mensagem de erro */
+.form-content.error a {
+  color: #ff0000; 
+  font-size: 0.8em;
+}
+
+.form button:hover{
+    background-color: #128bee;
 }
 
 .form-content.error input{
