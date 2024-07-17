@@ -43,8 +43,21 @@
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" required><br>
-        
-            <input type="submit" value="Alugar">
+
+        <button id="alugar-button" type="button">Alugar</button>
+        <script>
+            document.getElementById("alugar-button").addEventListener("click", function() {
+                var tamanho = document.getElementById("tamanho").value;
+                var quantidade = document.getElementById("quantidade").value;
+                var codigo = document.getElementById("codigo").value;
+                var dataEmprestimo = document.getElementById("data-emprestimo").value;
+                var dataDevolucao = document.getElementById("data-devolucao").value;
+                var nome = document.getElementById("nome").value;
+                var telefone = document.getElementById("telefone").value;
+                var email = document.getElementById("email").value;
+                alert("Button clicked!");
+            });
+        </script>
     </form>
     </div>
     </body>
