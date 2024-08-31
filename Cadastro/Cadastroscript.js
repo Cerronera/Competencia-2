@@ -8,9 +8,11 @@ const email = document.getElementById('email');
 const senha = document.getElementById('password');
 const senhaconfirm = document.getElementById('password-confirmation');
 
-form.addEventListener('submit', (event) => {
+form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    checkForm();
+    if (checkForm()) {
+        await submitForm();
+    }
 });
 
 idade.addEventListener("blur",() => {
@@ -179,11 +181,13 @@ function checkForm(){
         // Adiciona a classe 'success' e remove 'error' se o formulário for válido
         submitButton.classList.add('success');
         submitButton.classList.remove('error');
+        return true;
     } else {
         alert("Preencha todos os campos corretamente");
         // Adiciona a classe 'error' e remove 'success' se o formulário for inválido
         submitButton.classList.add('error');
         submitButton.classList.remove('success');
+        return false;
     }
 }
 
@@ -192,4 +196,35 @@ function errorinput(input, message) {
     const textMessage = formItem.querySelector("a");
     textMessage.innerText = message;
     formItem.className = 'form-content error';
+}
+
+async function submitForm() {
+    const formData = {
+        nome_completo: name.value,
+        idade: idade.value,
+        cpf: cpf.value,
+        peso: peso.value,
+        posicao: intencao.value,
+        email: email.value,
+        senha: senha.value
+    };
+
+    try {
+        const response = await fetch('http://localhost:3000/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Usuário cadastrado com sucesso:', data);
+        } else {
+            console.error('Erro ao cadastrar usuário:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Erro ao cadastrar usuário:', error);
+    }
 }

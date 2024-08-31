@@ -8,132 +8,100 @@ const dataEmprestimo = document.getElementById('data-emprestimo');
 const dataDevolucao = document.getElementById('data-devolucao');
 const telefone = document.getElementById('telefone');
 
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    checkForm();
-});
-
-name.addEventListener("blur",() => {
-    checkInputsName();
-});
-
-tamanho.addEventListener("blur",() => {
-    checkInputsTamanho();
-});
-
-quantidade.addEventListener("blur",() => {
-    checkInputsQuantidade();
-});
-
-codigo.addEventListener("blur",() => {
-    checkInputsCodigo();
-});
-
-dataEmprestimo.addEventListener("blur",() => {
-    checkInputsDataEmprestimo();
-});
-
-dataDevolucao.addEventListener("blur",() => {
-    checkInputsDataDevolucao();
-});
-
-telefone.addEventListener("blur",() => {
-    checkInputsTelefone();
-});
-
 function checkInputsName() {
     const nameValue = name.value;
-    if(nameValue === '') {
+    if (nameValue === '') {
         errorinput(name, "Preencha o campo Nome");
-    }else {
+        return false;
+    } else {
         const formItem = name.parentElement;
-        formItem.className = "form-content"
+        formItem.className = "form-content";
+        return true;
     }
-}   
+}
 
 function checkInputsTamanho() {
     const tamanhoValue = tamanho.value;
-    if(tamanhoValue === '') {
+    if (tamanhoValue === '') {
         errorinput(tamanho, "Preencha o campo Tamanho");
-    }else {
+        return false;
+    } else {
         const formItem = tamanho.parentElement;
-        formItem.className = "form-content"
+        formItem.className = "form-content";
+        return true;
     }
 }
 
 function checkInputsQuantidade() {
     const quantidadeValue = quantidade.value;
-    if(quantidadeValue === '') {
+    if (quantidadeValue === '') {
         errorinput(quantidade, "Preencha o campo Quantidade");
-    }else {
+        return false;
+    } else {
         const formItem = quantidade.parentElement;
-        formItem.className = "form-content"
+        formItem.className = "form-content";
+        return true;
     }
 }
 
 function checkInputsCodigo() {
     const codigoValue = codigo.value;
-    if(codigoValue === '') {
+    if (codigoValue === '') {
         errorinput(codigo, "Preencha o campo Código");
-    }else {
+        return false;
+    } else {
         const formItem = codigo.parentElement;
-        formItem.className = "form-content"
+        formItem.className = "form-content";
+        return true;
     }
 }
 
 function checkInputsDataEmprestimo() {
     const dataEmprestimoValue = dataEmprestimo.value;
-    if(dataEmprestimoValue === '') {
+    if (dataEmprestimoValue === '') {
         errorinput(dataEmprestimo, "Preencha o campo Data de Empréstimo");
-    }else {
+        return false;
+    } else {
         const formItem = dataEmprestimo.parentElement;
-        formItem.className = "form-content"
+        formItem.className = "form-content";
+        return true;
     }
 }
 
 function checkInputsDataDevolucao() {
     const dataDevolucaoValue = dataDevolucao.value;
-    if(dataDevolucaoValue === '') {
+    if (dataDevolucaoValue === '') {
         errorinput(dataDevolucao, "Preencha o campo Data de Devolução");
-    }else {
+        return false;
+    } else {
         const formItem = dataDevolucao.parentElement;
-        formItem.className = "form-content"
+        formItem.className = "form-content";
+        return true;
     }
 }
 
 function checkInputsTelefone() {
     const telefoneValue = telefone.value;
-    if(telefoneValue === '') {
+    if (telefoneValue === '') {
         errorinput(telefone, "Preencha o campo Telefone");
-    }else {
+        return false;
+    } else {
         const formItem = telefone.parentElement;
-        formItem.className = "form-content"
+        formItem.className = "form-content";
+        return true;
     }
 }
 
-function checkForm(){
-    checkInputsName();
-    checkInputsTamanho();
-    checkInputsQuantidade();
-    checkInputsCodigo();
-    checkInputsDataEmprestimo();
-    checkInputsDataDevolucao();
-    checkInputsTelefone();
-    const formItems = form.querySelectorAll(".form-content");
-    const isValid = [...formItems].every((item) => {
-        return item.className === "form-content"
-    });
-    const submitButton = form.querySelector('button[type="submit"]');
+function checkForm() {
+    const isNameValid = checkInputsName();
+    const isTamanhoValid = checkInputsTamanho();
+    const isQuantidadeValid = checkInputsQuantidade();
+    const isCodigoValid = checkInputsCodigo();
+    const isDataEmprestimoValid = checkInputsDataEmprestimo();
+    const isDataDevolucaoValid = checkInputsDataDevolucao();
+    const isTelefoneValid = checkInputsTelefone();
 
-    if(isValid) {
-        alert("Reserva realizada com sucesso");
-        submitButton.classList.add('success');
-        submitButton.classList.remove('error');
-    }else {
-        alert("Preencha todos os campos corretamente");
-        submitButton.classList.add('error');
-        submitButton.classList.remove('success');
-    }
+    return isNameValid && isTamanhoValid && isQuantidadeValid && isCodigoValid && isDataEmprestimoValid && isDataDevolucaoValid && isTelefoneValid;
 }
 
 function errorinput(input, message) {
@@ -142,3 +110,44 @@ function errorinput(input, message) {
     textMessage.innerText = message;
     formItem.className = 'form-content error';
 }
+
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (checkForm()) {
+        const emprestimo = {
+            nome_usuario: name.value,
+            tamanho: tamanho.value,
+            quantidade: quantidade.value,
+            tipo: tipo.value,
+            codigo: codigo.value,
+            dataEmprestimo: dataEmprestimo.value,
+            dataDevolucao: dataDevolucao.value,
+            telefone: telefone.value
+        };
+
+        console.log('Enviando dados do empréstimo:', emprestimo);
+
+        fetch('http://localhost:3000/emprestimos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(emprestimo)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Resposta do servidor:', data);
+            if (data.error) {
+                console.error('Erro ao registrar empréstimo:', data.details);
+                alert("Erro ao registrar empréstimo");
+            } else {
+                alert("Empréstimo realizado com sucesso");
+                form.reset();
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao registrar empréstimo:', error);
+            alert("Erro ao registrar empréstimo");
+        });
+    }
+});

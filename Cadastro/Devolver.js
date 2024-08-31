@@ -1,127 +1,93 @@
-const form = document.getElementById('form');
-const nome = document.getElementById('nome');
-const telefone = document.getElementById('telefone');
-const dataDevolucao = document.getElementById('data-devolucao');
-const quantidadeDevolvida = document.getElementById('quantidade-devolvida');
-const codigosProdutosDevolvidos = document.getElementById('codigos-devolvidos');
-const estadoEquipamentos = document.getElementById('estado-equipamentos');
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('form-devolucao');
+    const name = document.getElementById('nome');
+    const codigo = document.getElementById('codigo');
+    const dataDevolucao = document.getElementById('data-devolucao');
 
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    checkForm();
-});
-
-nome.addEventListener("blur",() => {
-    checkInputsNome();
-});
-
-telefone.addEventListener("blur",() => {
-    checkInputsTelefone();
-});
-
-dataDevolucao.addEventListener("blur",() => {
-    checkInputsDataDevolucao();
-});
-
-quantidadeDevolvida.addEventListener("blur",() => {
-    checkInputsQuantidadeDevolvida();
-});
-
-codigosProdutosDevolvidos.addEventListener("blur",() => {
-    checkInputsCodigosProdutosDevolvidos();
-});
-
-estadoEquipamentos.addEventListener("blur",() => {
-    checkInputsEstadoEquipamentos();
-});
-
-function checkInputsNome() {
-    const nomeValue = nome.value;
-    if(nomeValue === '') {
-        errorInput(nome, "Preencha o campo Nome");
-    }else {
-        const formItem = nome.parentElement;
-        formItem.className = "form-content"
+    function checkInputsName() {
+        const nameValue = name.value;
+        if (nameValue === '') {
+            errorinput(name, "Preencha o campo Nome");
+            return false;
+        } else {
+            const formItem = name.parentElement;
+            formItem.className = "form-content";
+            return true;
+        }
     }
-}   
 
-function checkInputsTelefone() {
-    const telefoneValue = telefone.value;
-    if(telefoneValue === '') {
-        errorInput(telefone, "Preencha o campo Telefone");
-    }else {
-        const formItem = telefone.parentElement;
-        formItem.className = "form-content"
+    function checkInputsCodigo() {
+        const codigoValue = codigo.value;
+        if (codigoValue === '') {
+            errorinput(codigo, "Preencha o campo Código");
+            return false;
+        } else {
+            const formItem = codigo.parentElement;
+            formItem.className = "form-content";
+            return true;
+        }
     }
-}
 
-function checkInputsDataDevolucao() {
-    const dataDevolucaoValue = dataDevolucao.value;
-    if(dataDevolucaoValue === '') {
-        errorInput(dataDevolucao, "Preencha o campo Data de Devolução");
-    }else {
-        const formItem = dataDevolucao.parentElement;
-        formItem.className = "form-content"
+    function checkInputsDataDevolucao() {
+        const dataDevolucaoValue = dataDevolucao.value;
+        if (dataDevolucaoValue === '') {
+            errorinput(dataDevolucao, "Preencha o campo Data de Devolução");
+            return false;
+        } else {
+            const formItem = dataDevolucao.parentElement;
+            formItem.className = "form-content";
+            return true;
+        }
     }
-}
 
-function checkInputsQuantidadeDevolvida() {
-    const quantidadeDevolvidaValue = quantidadeDevolvida.value;
-    if(quantidadeDevolvidaValue === '') {
-        errorInput(quantidadeDevolvida, "Preencha o campo Quantidade Devolvida");
-    }else {
-        const formItem = quantidadeDevolvida.parentElement;
-        formItem.className = "form-content"
+    function checkForm() {
+        const isNameValid = checkInputsName();
+        const isCodigoValid = checkInputsCodigo();
+        const isDataDevolucaoValid = checkInputsDataDevolucao();
+
+        return isNameValid && isCodigoValid && isDataDevolucaoValid;
     }
-}
 
-function checkInputsCodigosProdutosDevolvidos() {
-    const codigosProdutosDevolvidosValue = codigosProdutosDevolvidos.value;
-    if(codigosProdutosDevolvidosValue === '') {
-        errorInput(codigosProdutosDevolvidos, "Preencha o campo Códigos dos Produtos Devolvidos");
-    }else {
-        const formItem = codigosProdutosDevolvidos.parentElement;
-        formItem.className = "form-content"
+    function errorinput(input, message) {
+        const formItem = input.parentElement;
+        const textMessage = formItem.querySelector("a");
+        textMessage.innerText = message;
+        formItem.className = 'form-content error';
     }
-}
 
-function checkInputsEstadoEquipamentos() {
-    const estadoEquipamentosValue = estadoEquipamentos.value;
-    if(estadoEquipamentosValue === '') {
-        errorInput(estadoEquipamentos, "Preencha o campo Estado dos Equipamentos");
-    }else {
-        const formItem = estadoEquipamentos.parentElement;
-        formItem.className = "form-content"
-    }
-}
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (checkForm()) {
+            const devolucao = {
+                nome_usuario: name.value,
+                codigo: codigo.value,
+                dataDevolucao: dataDevolucao.value
+            };
 
-function checkForm(){
-    checkInputsNome();
-    checkInputsTelefone();
-    checkInputsDataDevolucao();
-    checkInputsQuantidadeDevolvida();
-    checkInputsCodigosProdutosDevolvidos();
-    checkInputsEstadoEquipamentos();
-    const formItems = form.querySelectorAll(".form-content");
-    const isValid = [...formItems].every((item) => {
-        return item.className === "form-content"
+            console.log('Enviando dados da devolução:', devolucao);
+
+            fetch('http://localhost:3000/devolucoes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(devolucao)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Resposta do servidor:', data);
+                if (data.error) {
+                    console.error('Erro ao devolver equipamento:', data.details);
+                    alert("Erro ao devolver equipamento");
+                } else {
+                    alert("Equipamento devolvido com sucesso");
+                    form.reset();
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao devolver equipamento:', error);
+                alert("Erro ao devolver equipamento");
+            });
+        }
     });
-
-    const submitButton = form.querySelector('button[type="submit"]');
-    if(isValid) {
-        alert("Devolução realizada com sucesso");
-        submitButton.classList.add('success');
-        submitButton.classList.remove('error');
-    }else {
-        alert("Preencha todos os campos corretamente");
-        submitButton.classList.add('error');
-        submitButton.classList.remove('success');
-    }
-}
-
-function errorInput(input, message) {
-    const formItem = input.parentElement;
-    const textMessage = formItem.querySelector("a");
-    textMessage.innerText = message;
-    formItem.className = 'form-content error';
-}
+});
