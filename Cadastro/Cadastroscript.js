@@ -221,6 +221,10 @@ async function submitForm() {
         if (response.ok) {
             const data = await response.json();
             console.log('Usuário cadastrado com sucesso:', data);
+            // Redirecionar para a tela de login após o cadastro bem-sucedido
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 2000); // Espera 4 segundos antes de redirecionar
         } else {
             console.error('Erro ao cadastrar usuário:', response.statusText);
         }
