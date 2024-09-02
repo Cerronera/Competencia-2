@@ -1,7 +1,9 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../database'); // Importar a configuração do Sequelize
 
-const Equipamento = sequelize.define('Equipamento', {
+class Equipamento extends Model {}
+
+Equipamento.init({
     tamanho: {
         type: DataTypes.STRING,
         allowNull: false
@@ -11,14 +13,21 @@ const Equipamento = sequelize.define('Equipamento', {
         allowNull: false,
         unique: true
     },
+    tipo: {
+        type: DataTypes.STRING,
+        allowNull: false // Adicionar a restrição NOT NULL
+    },
     status: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 'disponivel' // Status inicial como disponível
     }
 }, {
+    sequelize,
+    modelName: 'Equipamento',
     tableName: 'equipamentos', // Nome da tabela
     freezeTableName: true, // Desativar a pluralização automática
     timestamps: true // Adicionar colunas createdAt e updatedAt
 });
 
-module.exports = { Equipamento };
+module.exports = Equipamento;

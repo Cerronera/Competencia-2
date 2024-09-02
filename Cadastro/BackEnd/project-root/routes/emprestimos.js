@@ -1,39 +1,7 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../database');
+const express = require('express');
+const router = express.Router();
+const { registrarEmprestimo } = require('../controllers/emprestimosController');
 
-const Emprestimo = sequelize.define('Emprestimo', {
-    nome_usuario: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    tamanho: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    quantidade: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    tipo: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    codigo: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    dataEmprestimo: {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-    dataDevolucao: {
-        type: DataTypes.DATE,
-        allowNull: false
-    },
-    telefone: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-});
+router.post('/', registrarEmprestimo);
 
-module.exports = Emprestimo;
+module.exports = router;

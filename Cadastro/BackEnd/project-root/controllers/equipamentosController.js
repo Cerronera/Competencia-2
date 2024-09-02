@@ -1,12 +1,13 @@
 const { Equipamento } = require('../models/equipamento');
 
 exports.cadastrarEquipamento = async (req, res) => {
-    const { tamanho, codigo_produto, status } = req.body;
+    const { tamanho, codigo_produto, status,tipo } = req.body;
     try {
         const novoEquipamento = await Equipamento.create({
             tamanho,
             codigo_produto,
-            status
+            status,
+            tipo
         });
         res.status(201).json(novoEquipamento);
     } catch (error) {
