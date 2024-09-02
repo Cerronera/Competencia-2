@@ -1,8 +1,9 @@
 const Emprestimo = require('../models/emprestimo');
 const Equipamento = require('../models/equipamento'); // Certifique-se de que o caminho está correto
+const Devolucao = require('../models/devolucao'); // Importar o modelo Devolucao
 
 exports.registrarDevolucao = async (req, res) => {
-    const { codigo_produto } = req.body;
+    const { codigo_produto, estado_equipamento } = req.body;
     try {
         // Verificar se o empréstimo existe e está ativo (não devolvido)
         const emprestimo = await Emprestimo.findOne({ where: { codigo_produto, status: 'Não devolvido' } });
@@ -34,6 +35,18 @@ exports.registrarDevolucao = async (req, res) => {
         } else {
             message += `. O usuário devolveu o equipamento no prazo.`;
         }
+
+        // Registrar a devolução na tabela Devolucoes
+        await Devolucao.create({
+            nome_usuario: emprestimo.nome_usuario,
+            codigo_produto: codigo_produto,
+            telefone: emprestimo.telefone,
+            dataDevolucaoReal: dataDevolucaoReal,
+            dataDevolucaoPrometida: dataDevolucaoPrometida,
+            diasAtraso: diffDays,
+            status: emprestimo.status,
+            estado_equipamento: estado_equipamento
+        });
 
         res.status(200).json({ message });
     } catch (error) {
