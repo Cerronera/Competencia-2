@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Emprestimo = require('../models/emprestimo'); // Corrigir caminho
-const Equipamento = require('../models/equipamento'); // Corrigir caminho
-const Devolucao = require('../models/devolucao'); // Corrigir caminho
+const Emprestimo = require('../models/emprestimo'); 
+const Equipamento = require('../models/equipamento');
+const Devolucao = require('../models/devolucao');
 
 router.get('/dados', async (req, res) => {
     try {

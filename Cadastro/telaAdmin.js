@@ -44,3 +44,33 @@ document.getElementById('load-data-btn').addEventListener('click', async () => {
         console.error('Erro ao buscar dados:', error);
     }
 });
+
+document.getElementById('form-equipamento').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const tamanho = document.getElementById('tamanho').value;
+    const codigo_produto = document.getElementById('codigo_produto').value;
+    const tipo = document.getElementById('tipo').value;
+
+    try {
+        const response = await fetch('http://localhost:3000/equipamentos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ tamanho, codigo_produto, tipo, status: 'Disponível' })
+        });
+
+        if (response.ok) {
+            alert('Equipamento cadastrado com sucesso!');
+            document.getElementById('form-equipamento').reset();
+            document.getElementById('load-data-btn').click(); // Recarregar dados
+        } else {
+            const errorData = await response.json();
+            alert(`Erro: ${errorData.error}`);
+        }
+    } catch (error) {
+        console.error('Erro ao cadastrar equipamento:', error);
+        alert('Erro ao cadastrar equipamento. Tente novamente mais tarde.');
+    }
+});

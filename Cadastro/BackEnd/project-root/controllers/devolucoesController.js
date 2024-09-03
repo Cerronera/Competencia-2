@@ -1,6 +1,6 @@
 const Emprestimo = require('../models/emprestimo');
-const Equipamento = require('../models/equipamento'); // Certifique-se de que o caminho está correto
-const Devolucao = require('../models/devolucao'); // Importar o modelo Devolucao
+const Equipamento = require('../models/equipamento');
+const Devolucao = require('../models/devolucao'); 
 
 exports.registrarDevolucao = async (req, res) => {
     const { codigo_produto, estado_equipamento } = req.body;

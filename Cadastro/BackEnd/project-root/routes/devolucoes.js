@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const devolucoesController = require('../controllers/devolucoesController'); // Certifique-se de que o caminho está correto
+const devolucoesController = require('../controllers/devolucoesController');
 
 // Rota para registrar uma devolução
 router.post('/', devolucoesController.registrarDevolucao);

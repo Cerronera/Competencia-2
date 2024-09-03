@@ -16,7 +16,7 @@ body {
 
 body::before {
     content: "";
-    position: fixed; /* Mudado para fixed para cobrir toda a tela sem afetar a rolagem */
+    position: fixed; 
     top: 0;
     left: 0;
     right: 0;
@@ -24,7 +24,7 @@ body::before {
     background-image: url(Imagens/neon.jpg);
     background-size: cover;
     background-position: center;
-    z-index: -1; /* Mantém a imagem de fundo atrás do conteúdo do body */
+    z-index: -1; 
 }
 
 .container{

@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const { Usuario } = require('../models/usuario');
-const jwt = require('jsonwebtoken'); // Adicione esta linha para usar JWT
+const jwt = require('jsonwebtoken');
 
 exports.cadastrarUsuario = async (req, res) => {
     const { nome_completo, idade, cpf, peso, posicao, email, senha } = req.body;
@@ -29,7 +29,6 @@ exports.loginUsuario = async (req, res) => {
             return res.status(401).json({ error: 'Credenciais inválidas' });
         }
 
-        // Gera um token JWT (opcional)
         const token = jwt.sign({ id: usuario.id }, 'seu_segredo_jwt', { expiresIn: '1h' });
 
         res.status(200).json({ message: 'Login bem-sucedido', token });

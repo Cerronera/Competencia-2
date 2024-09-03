@@ -1,5 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
-const sequelize = require('../database'); // Certifique-se de que o caminho está correto
+const sequelize = require('../database');
 
 class Emprestimo extends Model {}
 
@@ -30,12 +30,12 @@ Emprestimo.init({
     },
     dataDevolucaoPrometida: {
         type: DataTypes.DATE,
-        allowNull: false, // Data prometida para devolução
+        allowNull: false,
         defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
     },
     dataDevolucao: {
         type: DataTypes.DATE,
-        allowNull: true // Permitir valores nulos para indicar que o empréstimo ainda está em aberto
+        allowNull: true
     },
     telefone: {
         type: DataTypes.STRING,
@@ -44,7 +44,7 @@ Emprestimo.init({
     status: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: 'Não devolvido' // Status inicial do empréstimo
+        defaultValue: 'Não devolvido'
     }
 }, {
     sequelize,

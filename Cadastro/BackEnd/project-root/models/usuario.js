@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../database'); // Importar a configuração do Sequelize
+const sequelize = require('../database');
 
 const Usuario = sequelize.define('Usuario', {
     nome_completo: {
@@ -33,9 +33,9 @@ const Usuario = sequelize.define('Usuario', {
         allowNull: false
     }
 }, {
-    tableName: 'usuarios', // Nome da tabela
-    freezeTableName: true, // Desativar a pluralização automática
-    timestamps: true // Adicionar colunas createdAt e updatedAt
+    tableName: 'usuarios', 
+    freezeTableName: true, 
+    timestamps: true
 });
 
 module.exports = { Usuario };

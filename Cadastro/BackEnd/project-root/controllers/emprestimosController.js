@@ -1,5 +1,5 @@
 const Emprestimo = require('../models/emprestimo');
-const Equipamento = require('../models/equipamento'); // Certifique-se de que o caminho está correto
+const Equipamento = require('../models/equipamento');
 
 exports.registrarEmprestimo = async (req, res) => {
     const { nome_usuario, tamanho, quantidade, tipo, codigo_produto, dataEmprestimo, dataDevolucao, telefone } = req.body;

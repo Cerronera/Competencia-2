@@ -1,6 +1,5 @@
 function realizarLogin() {
     // Lógica para realizar o login aqui
-    // Por exemplo, você pode obter os valores dos campos de entrada de usuário e senha
     const usuario = document.getElementById('usuario').value;
     const senha = document.getElementById('senha').value;
     const usuarioValido = 'admin';
@@ -17,6 +16,5 @@ function realizarLogin() {
    
 }
 
-// Adicione um ouvinte de evento ao botão de login para chamar a função realizarLogin quando for clicado
 const botaoLogin = document.getElementById('botao-login');
 botaoLogin.addEventListener('click', realizarLogin);

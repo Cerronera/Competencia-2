@@ -6,7 +6,7 @@ const { DataTypes } = require('sequelize');
         const queryInterface = sequelize.getQueryInterface();
         await queryInterface.addColumn('equipamentos', 'tipo', {
             type: DataTypes.STRING,
-            allowNull: true // Permitir valores nulos inicialmente
+            allowNull: true
         });
         console.log('Coluna "tipo" adicionada com sucesso.');
     } catch (error) {

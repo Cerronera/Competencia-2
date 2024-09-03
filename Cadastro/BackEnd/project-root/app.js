@@ -6,7 +6,7 @@ const sequelize = require('./database');
 const authRoutes = require('./routes/auth');
 const equipamentosRoutes = require('./routes/equipamentos');
 const emprestimosRoutes = require('./routes/emprestimos');
-const devolucoesRoutes = require('./routes/devolucoes'); // Importar as rotas de devoluções
+const devolucoesRoutes = require('./routes/devolucoes');
 const adminRoutes = require('./routes/admin');
 
 dotenv.config();
@@ -19,13 +19,13 @@ app.use(bodyParser.json());
 app.use('/auth', authRoutes);
 app.use('/equipamentos', equipamentosRoutes);
 app.use('/emprestimos', emprestimosRoutes);
-app.use('/devolucoes', devolucoesRoutes); // Usar as rotas de devoluções
+app.use('/devolucoes', devolucoesRoutes);
 app.use('/admin', adminRoutes);
 
-sequelize.sync({ alter: true }) // Sincronizar o banco de dados
+sequelize.sync({ alter: true })
     .then(() => {
         console.log('Banco de dados sincronizado com sucesso.');
-        const port = process.env.PORT || 3000; // Use a variável de ambiente PORT ou 3000 como padrão
+        const port = process.env.PORT || 3000;
         app.listen(port, () => {
             console.log(`Servidor rodando na porta ${port}`);
         });

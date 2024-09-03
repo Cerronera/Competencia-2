@@ -1,5 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
-const sequelize = require('../database'); // Certifique-se de que o caminho está correto
+const sequelize = require('../database');
 
 class Devolucao extends Model {}
 
@@ -35,13 +35,13 @@ Devolucao.init({
     estado_equipamento: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: 'Desconhecido' // Valor padrão
+        defaultValue: 'Desconhecido'
     }
 }, {
     sequelize,
     modelName: 'Devolucao',
-    tableName: 'Devolucaos', // Nome da tabela no banco de dados
-    freezeTableName: true, // Desativar a pluralização automática
+    tableName: 'Devolucaos',
+    freezeTableName: true, 
     timestamps: true
 });
 

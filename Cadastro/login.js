@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 localStorage.setItem('token', data.token);
                 alert('Login bem-sucedido!');
-                // Redirecionar para a página menu.html
+                
                 window.location.href = 'menu.html';
             } else {
                 alert(`Erro ao fazer login: ${data.error}`);

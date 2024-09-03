@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Equipamento = require('../models/equipamento'); // Certifique-se de que o caminho está correto
+const Equipamento = require('../models/equipamento');
 
 // Rota para criar um novo equipamento
 router.post('/', async (req, res) => {

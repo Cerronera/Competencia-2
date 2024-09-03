@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { cadastrarUsuario, loginUsuario } = require('../controllers/authController');
-const { Usuario } = require('../models/usuario'); // Importar o modelo Usuario
+const { Usuario } = require('../models/usuario');
 
 router.post('/register', cadastrarUsuario);
 router.post('/login', loginUsuario);
