@@ -7,6 +7,7 @@ const authRoutes = require('./routes/auth');
 const equipamentosRoutes = require('./routes/equipamentos');
 const emprestimosRoutes = require('./routes/emprestimos');
 const devolucoesRoutes = require('./routes/devolucoes'); // Importar as rotas de devoluções
+const adminRoutes = require('./routes/admin');
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use('/auth', authRoutes);
 app.use('/equipamentos', equipamentosRoutes);
 app.use('/emprestimos', emprestimosRoutes);
 app.use('/devolucoes', devolucoesRoutes); // Usar as rotas de devoluções
+app.use('/admin', adminRoutes);
 
 sequelize.sync({ alter: true }) // Sincronizar o banco de dados
     .then(() => {

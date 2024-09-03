@@ -1,36 +1,22 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const token = localStorage.getItem('adminToken');
-    if (!token) {
-        alert('Você não está autenticado!');
-        window.location.href = 'adminLogin.html';
-        return;
+function realizarLogin() {
+    // Lógica para realizar o login aqui
+    // Por exemplo, você pode obter os valores dos campos de entrada de usuário e senha
+    const usuario = document.getElementById('usuario').value;
+    const senha = document.getElementById('senha').value;
+    const usuarioValido = 'admin';
+    const senhaValida = 'admin123';
+
+    if(usuario === usuarioValido && senha === senhaValida) {
+        alert('Login realizado com sucesso!');
+        // Redirecionar para a página de administração
+        window.location.href = 'telaAdmin.html';
+    } else {
+        alert('Usuário ou senha inválidos. Tente novamente.');
     }
 
-    try {
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
-        };
+   
+}
 
-        const [equipamentosResponse, emprestimosResponse, devolucoesResponse] = await Promise.all([
-            fetch('http://localhost:3000/equipamentos', { headers }),
-            fetch('http://localhost:3000/emprestimos', { headers }),
-            fetch('http://localhost:3000/devolucoes', { headers })
-        ]);
-
-        if (!equipamentosResponse.ok || !emprestimosResponse.ok || !devolucoesResponse.ok) {
-            throw new Error('Erro ao buscar informações');
-        }
-
-        const equipamentos = await equipamentosResponse.json();
-        const emprestimos = await emprestimosResponse.json();
-        const devolucoes = await devolucoesResponse.json();
-
-        document.getElementById('equipamentos-info').innerText = JSON.stringify(equipamentos, null, 2);
-        document.getElementById('emprestimos-info').innerText = JSON.stringify(emprestimos, null, 2);
-        document.getElementById('devolucoes-info').innerText = JSON.stringify(devolucoes, null, 2);
-    } catch (error) {
-        console.error('Erro ao buscar informações:', error);
-        alert('Erro ao buscar informações');
-    }
-});
+// Adicione um ouvinte de evento ao botão de login para chamar a função realizarLogin quando for clicado
+const botaoLogin = document.getElementById('botao-login');
+botaoLogin.addEventListener('click', realizarLogin);

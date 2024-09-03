@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <title>Administração - Wolves UTFPR</title>
+  <link rel="stylesheet" href="style2.css">
+  <link rel="shortcut icon" href="imagens/icone.ico" type="image/x-icon">
+  <style>
+    @font-face {
+        font-family: 'Thiscafe';
+        src: url(fontes/This\ Cafe.otf),url(fontes/This\ Cafe.ttf);
+        font-weight: normal;
+        font-style: normal;
+    }
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    h2 {
+        font-family: 'Roboto', Helvetica, sans-serif;
+        color: #ffffff;
+        font-size: 3em;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    h3 {
+        font-family: 'Thiscafe', Helvetica, sans-serif;
+        color: #333;
+        font-size: 2em;
+        margin-top: 20px;
+        text-align: center;
+    }
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background-color: #fff;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+    #load-data-btn {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 1em;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    #load-data-btn:hover {
+        background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <h2>ADMINISTRAÇÃO</h2>
+  <button id="load-data-btn">Carregar Dados</button>
+  <div>
+    <h3>Emprestimos</h3>
+    <table id="emprestimos-table">
+      <thead>
+        <tr>
+          <th>Nome Usuário</th>
+          <th>Código Produto</th>
+          <th>Data Empréstimo</th>
+          <th>Data Devolução Prometida</th>
+          <th>Data Devolução</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dados serão inseridos aqui -->
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>Equipamentos</h3>
+    <table id="equipamentos-table">
+      <thead>
+        <tr>
+          <th>Código Produto</th>
+          <th>Tipo</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dados serão inseridos aqui -->
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3>Devoluções</h3>
+    <table id="devolucoes-table">
+      <thead>
+        <tr>
+          <th>Nome Usuário</th>
+          <th>Código Produto</th>
+          <th>Telefone</th>
+          <th>Data Devolução Real</th>
+          <th>Data Devolução Prometida</th>
+          <th>Dias Atraso</th>
+          <th>Status</th>
+          <th>Estado Equipamento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dados serão inseridos aqui -->
+      </tbody>
+    </table>
+  </div>
+  <script src="telaAdmin.js"></script>
+</body>
+</html>
