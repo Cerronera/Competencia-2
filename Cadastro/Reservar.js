@@ -119,9 +119,9 @@ form.addEventListener('submit', (event) => {
             tamanho: tamanho.value,
             quantidade: quantidade.value,
             tipo: tipo.value,
-            codigo: codigo.value,
+            codigo_produto: codigo.value,
             dataEmprestimo: dataEmprestimo.value,
-            dataDevolucao: dataDevolucao.value,
+            dataDevolucaoPrometida: dataDevolucao.value,
             telefone: telefone.value
         };
 
