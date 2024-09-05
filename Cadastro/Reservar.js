@@ -1,5 +1,5 @@
 const form = document.getElementById('form');
-const name = document.getElementById('nome');
+const nome = document.getElementById('nome');
 const tamanho = document.getElementById('tamanho');
 const quantidade = document.getElementById('quantidade');
 const tipo = document.getElementById('tipo');
@@ -9,12 +9,12 @@ const dataDevolucao = document.getElementById('data-devolucao');
 const telefone = document.getElementById('telefone');
 
 function checkInputsName() {
-    const nameValue = name.value;
+    const nameValue = nome.value;
     if (nameValue === '') {
-        errorinput(name, "Preencha o campo Nome");
+        errorinput(name_usuario, "Preencha o campo Nome");
         return false;
     } else {
-        const formItem = name.parentElement;
+        const formItem = nome.parentElement;
         formItem.className = "form-content";
         return true;
     }
@@ -115,7 +115,7 @@ form.addEventListener('submit', (event) => {
     event.preventDefault();
     if (checkForm()) {
         const emprestimo = {
-            nome_usuario: name.value,
+            nome_usuario: nome.value,
             tamanho: tamanho.value,
             quantidade: quantidade.value,
             tipo: tipo.value,
