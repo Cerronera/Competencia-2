@@ -19,7 +19,7 @@ exports.registrarDevolucao = async (req, res) => {
 
         // Atualizar o status do equipamento para 'disponivel'
         const equipamento = await Equipamento.findOne({ where: { codigo_produto } });
-        equipamento.status = 'disponivel';
+        equipamento.status = 'Disponível';
         await equipamento.save();
 
         // Calcular a diferença entre a data de devolução prometida e a data de devolução real
